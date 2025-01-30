@@ -1,0 +1,191 @@
+@import url('./normalize.css');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%; /* 1em = 10px */
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+}
+
+h1 {
+    font-size: 2.8em;
+}
+
+h2 {
+    font-size: 2.2em; 
+}
+
+h3 {
+    font-size: 1.8em;
+}
+
+p, li {
+    font-size: 1.6em;
+    color: #333;
+}
+
+.container {
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+.header {
+    background-color: #f9f9f9; 
+    border-bottom: 1px solid #ddd;
+    width: 100%; 
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 0;
+    margin: 0 auto;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.navbar {
+    position: relative;
+}
+
+.menu {
+    list-style: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff; 
+    display: none;
+    width: 200px;
+    padding: 1rem;
+    margin: 0;
+    gap: 1.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.menu li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.menu li a:hover {
+    text-decoration: underline;
+}
+
+.menu.show {
+    display: flex;
+}
+
+.menu-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.menu-toggle span {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    transition: background-color 0.3s;
+}
+
+.menu-toggle:hover span {
+    background-color: #979595;
+}
+
+main {
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.task-section {
+    width: 100%;
+    text-align: left;
+}
+
+.image-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+    max-width: 100%; 
+    overflow: hidden;
+
+}
+
+.image-gallery picture {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3; 
+    overflow: hidden;
+    border-radius: 0.5rem; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.image-gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+
+/**** MELLAN SKÄRM, IPADS ****/
+@media (min-width: 576px) {
+    .image-gallery {
+        grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
+    }
+}
+
+/**** DESKTOP ****/
+@media (min-width: 769px) {
+    .container {
+        max-width: 75%;
+    }
+
+    .header-inner {
+        padding: 2rem 0;
+    }
+
+    .menu {
+        flex-direction: row;
+        position: static;
+        display: flex;
+        padding: 0;
+        background-color: transparent;
+        box-shadow: none;
+    }
+    .menu li {
+        margin-bottom: 0;
+    }
+    .menu li a.active {
+        text-decoration: underline;
+    }
+    
+    .menu-toggle {
+        display: none;
+    }
+    .task {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .task-section {
+        width: 60%;
+    }
+    .image-gallery {
+        grid-template-columns: repeat(auto-fill, minmax(25%, 1fr));
+    }
+}
