@@ -111,42 +111,52 @@ main {
     padding: 2rem 0;
     text-align: center;
 }
-
-.task-section {
+#search {
     width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1.6rem;
+}
+
+.courseList {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.columns {
+    display: flex;
+    gap: 2rem;
+    flex-direction: column; 
+    justify-content: space-between;
+}
+
+.column {
+    flex: 1;
+    padding: 10px;
     text-align: left;
 }
 
-.image-gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
-    gap: 1.5rem;
-    margin-top: 2rem;
-    max-width: 100%; 
-    overflow: hidden;
-
+.column h3 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 1rem;
+    cursor: pointer;
 }
 
-.image-gallery picture {
-    display: block;
-    width: 100%;
-    aspect-ratio: 4 / 3; 
-    overflow: hidden;
-    border-radius: 0.5rem; 
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+#codeColumn, #nameColumn, #progressionColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-.image-gallery img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; 
-}
-
-/**** MELLAN SKÄRM, IPADS ****/
-@media (min-width: 576px) {
-    .image-gallery {
-        grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
-    }
+.item {
+    font-size: 1.6rem;
+    color: #333;
+    padding: 10px 0;
 }
 
 /**** DESKTOP ****/
@@ -177,15 +187,17 @@ main {
     .menu-toggle {
         display: none;
     }
-    .task {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+
+    .columns {
+        flex-direction: row; 
     }
-    .task-section {
-        width: 60%;
+
+    .column {
+        margin-bottom: 0; 
     }
-    .image-gallery {
-        grid-template-columns: repeat(auto-fill, minmax(25%, 1fr));
+
+    #search {
+        width: 100%;
+        margin-bottom: 1rem;
     }
 }

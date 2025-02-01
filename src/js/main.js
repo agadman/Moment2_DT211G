@@ -6,7 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
         menu.classList.toggle('show');
     });
 
-    loadCourses();
+    if (document.body.contains(document.querySelector("#codeColumn"))) {
+        loadCourses(); 
+    }
 });
 
 let courses = [];
@@ -20,6 +22,8 @@ async function loadCourses() {
         
         courses = await response.json();
         printCourses(courses);
+
+        document.querySelector("#search").addEventListener("input", filterData);
 
     } catch (error) {
         console.error(error);
@@ -77,4 +81,13 @@ function printSorted(columnId, key) {
         div.textContent = course[key];
         column.appendChild(div);
     });
+}
+
+function filterData() {
+    const searchPhrase = document.querySelector("#search").value.toLowerCase(); 
+    const filteredCourses = courses.filter(course =>
+        course.coursename.toLowerCase().includes(searchPhrase.toLowerCase()) || 
+        course.code.toLowerCase().includes(searchPhrase.toLowerCase())   
+    );
+    printCourses(filteredCourses);  
 }
