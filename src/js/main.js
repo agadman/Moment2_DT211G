@@ -6,12 +6,13 @@ document.addEventListener('DOMContentLoaded', () => {
         menu.classList.toggle('show');
     });
 
-    if (document.body.contains(document.querySelector("#codeColumn"))) {
+    if (document.body.contains(document.querySelector("#sortCode"))) {
         loadCourses(); 
     }
 });
 
 let courses = [];
+let sortOrder = { coursename: 1, progression: 1, code: 1 };
 
 async function loadCourses() {
     try {
@@ -24,7 +25,6 @@ async function loadCourses() {
         printCourses(courses);
 
         document.querySelector("#search").addEventListener("input", filterData);
-
     } catch (error) {
         console.error(error);
         document.querySelector("#error").innerHTML = "<p>Fel vid anslutning - prova igen vid ett senare tillfälle!</p>";
@@ -32,62 +32,36 @@ async function loadCourses() {
 }
 
 function printCourses(data) {
-    const codeColumn = document.querySelector("#codeColumn");
-    const nameColumn = document.querySelector("#nameColumn");
-    const progressionColumn = document.querySelector("#progressionColumn");
-
-    codeColumn.innerHTML = "";
-    nameColumn.innerHTML = "";
-    progressionColumn.innerHTML = "";
+    const coursesTableBody = document.querySelector("#coursesTable");
+    coursesTableBody.innerHTML = "";
 
     data.forEach(course => {
-        const codeDiv = document.createElement("div");
-        codeDiv.classList.add("item");
-        codeDiv.textContent = course.code;
-        codeColumn.appendChild(codeDiv);
+        const row = document.createElement("tr");
 
-        const nameDiv = document.createElement("div");
-        nameDiv.classList.add("item");
-        nameDiv.textContent = course.coursename;
-        nameColumn.appendChild(nameDiv);
+        row.innerHTML = `
+            <td>${course.code}</td>
+            <td>${course.coursename}</td>
+            <td>${course.progression}</td>
+        `;
 
-        const progressionDiv = document.createElement("div");
-        progressionDiv.classList.add("item");
-        progressionDiv.textContent = course.progression;
-        progressionColumn.appendChild(progressionDiv);
+        coursesTableBody.appendChild(row);
     });
 
-    document.querySelector("#sortName").addEventListener("click", () => {
-        data.sort((a, b) => a.coursename < b.coursename ? -1 : 1);
-        printSorted("nameColumn", "coursename");
-    });
-    document.querySelector("#sortProgression").addEventListener("click", () => {
-        data.sort((a, b) => a.progression < b.progression ? -1 : 1);
-        printSorted("progressionColumn", "progression");
-    });
-    document.querySelector("#sortCode").addEventListener("click", () => {
-        data.sort((a, b) => a.code < b.code ? -1 : 1);
-        printSorted("codeColumn", "code");
-    });
+    document.querySelector("#sortName").addEventListener("click", () => toggleSort("coursename"));
+    document.querySelector("#sortProgression").addEventListener("click", () => toggleSort("progression"));
+    document.querySelector("#sortCode").addEventListener("click", () => toggleSort("code"));
 }
 
-function printSorted(columnId, key) {
-    const column = document.querySelector(`#${columnId}`);
-    column.innerHTML = ""; 
-
-    courses.forEach(course => {
-        const div = document.createElement("div");
-        div.classList.add("item");
-        div.textContent = course[key];
-        column.appendChild(div);
-    });
+function toggleSort(key) {
+    courses.sort((a, b) => (a[key] > b[key] ? 1 : -1)); 
+    printCourses(courses);
 }
 
 function filterData() {
     const searchPhrase = document.querySelector("#search").value.toLowerCase(); 
     const filteredCourses = courses.filter(course =>
-        course.coursename.toLowerCase().includes(searchPhrase.toLowerCase()) || 
-        course.code.toLowerCase().includes(searchPhrase.toLowerCase())   
+        course.coursename.toLowerCase().includes(searchPhrase) || 
+        course.code.toLowerCase().includes(searchPhrase)   
     );
-    printCourses(filteredCourses);  
+    printCourses(filteredCourses);
 }

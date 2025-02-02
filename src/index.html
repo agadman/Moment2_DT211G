@@ -34,20 +34,16 @@
                 <div>
                     <input type="text" id="search" placeholder="Sök...">
                 </div>
-                <div class="columns">
-                    <div class="column">
-                        <h3 id="sortCode">Kurskod</h3>
-                        <div id="codeColumn"></div>
-                    </div>
-                    <div class="column">
-                        <h3 id="sortName">Namn</h3>
-                        <div id="nameColumn"></div>
-                    </div>
-                    <div class="column">
-                        <h3 id="sortProgression">Progression</h3>
-                        <div id="progressionColumn"></div>
-                    </div>
-                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th id="sortCode">Kurskod</th>
+                            <th id="sortName">Namn</th>
+                            <th id="sortProgression">Progression</th>
+                        </tr>
+                    </thead>
+                    <tbody id="coursesTable"></tbody>
+                </table>
         </section>
     </main>  
 </body>

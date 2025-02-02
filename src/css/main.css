@@ -120,43 +120,25 @@ main {
     font-size: 1.6rem;
 }
 
-.courseList {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    padding: 2rem;
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
 }
 
-.columns {
-    display: flex;
-    gap: 2rem;
-    flex-direction: column; 
-    justify-content: space-between;
-}
-
-.column {
-    flex: 1;
+th, td {
     padding: 10px;
+    border: 1px solid #ddd;
     text-align: left;
 }
 
-.column h3 {
-    font-size: 1.8rem;
-    color: #333;
-    margin-bottom: 1rem;
+th {
+    background-color:#F5E8D9;
     cursor: pointer;
 }
 
-#codeColumn, #nameColumn, #progressionColumn {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.item {
-    font-size: 1.6rem;
-    color: #333;
-    padding: 10px 0;
+th:hover {
+    text-decoration: underline;
 }
 
 /**** DESKTOP ****/
@@ -186,14 +168,6 @@ main {
     
     .menu-toggle {
         display: none;
-    }
-
-    .columns {
-        flex-direction: row; 
-    }
-
-    .column {
-        margin-bottom: 0; 
     }
 
     #search {
